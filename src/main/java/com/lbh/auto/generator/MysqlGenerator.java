@@ -1,13 +1,16 @@
 package com.lbh.auto.generator;
 
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,7 +21,7 @@ import java.util.Map;
  **/
 public class MysqlGenerator {
 
-    private static final String URL = "jdbc:mysql://10.114.10.197:3306/data_asset_platform?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=CONVERT_TO_NULL";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/data?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true";
     private static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "123456";
@@ -49,11 +52,18 @@ public class MysqlGenerator {
     /**
      * 项目路径 （不可修改配置）
      */
-    private static final String PROJECT_PATH = FILE_PATH + "/java";
+    private static final String PROJECT_PATH = "code";
     private static final String AUTHOR = "linbeihua";
 
+    private static final List<String> TABLE_LIST = Lists.newArrayList("test_user");
+
     public static void main(String[] args) {
-        autoGenerator("admin_application_info", "");
+//        autoGenerator("admin_application_info", "");
+        if (CollectionUtils.isNotEmpty(TABLE_LIST)) {
+            TABLE_LIST.forEach(table -> {
+                autoGenerator(table, "");
+            });
+        }
     }
 
     private static void autoGenerator(String tableName, String entityName) {

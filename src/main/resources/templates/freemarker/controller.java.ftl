@@ -20,7 +20,7 @@ import ${superControllerClassPackage};
  * @author ${author}
  * @date ${.now}
  */
-<#if swagger2>
+<#if swagger>
 @Api(value = "${table.comment!}服务接口")
 </#if>
 <#if restControllerStyle>
@@ -28,7 +28,7 @@ import ${superControllerClassPackage};
 <#else>
 @Controller
 </#if>
-@RequestMapping("/${cfg.mapperUrl}")
+@RequestMapping("/${mapperUrl}")
 <#if kotlin>
 class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
 <#else>
