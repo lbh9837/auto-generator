@@ -18,25 +18,25 @@ import ${superControllerClassPackage};
  * </p>
  *
  * @author ${author}
- * @date ${.now}
- */
-<#if swagger>
-@Api(value = "${table.comment!}服务接口")
+* @date ${.now}
+*/
+<#if swagger2>
+    @Api(value = "${table.comment!}服务接口")
 </#if>
 <#if restControllerStyle>
-@RestController
+    @RestController
 <#else>
-@Controller
+    @Controller
 </#if>
-@RequestMapping("/${mapperUrl}")
+@RequestMapping("/${cfg.mapperUrl}")
 <#if kotlin>
-class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
+    class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
 <#else>
-<#if superControllerClass??>
-public class ${table.controllerName} extends ${superControllerClass} {
-<#else>
-public class ${table.controllerName} {
-</#if>
+    <#if superControllerClass??>
+        public class ${table.controllerName} extends ${superControllerClass} {
+    <#else>
+        public class ${table.controllerName} {
+    </#if>
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
