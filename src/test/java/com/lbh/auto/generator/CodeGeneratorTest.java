@@ -35,7 +35,7 @@ public class CodeGeneratorTest {
     @Test
     public void testSuZhouAutoGenerator() {
         codeGenerator = new SuZhouBankGenerator();
-        List<String> tableList = Lists.newArrayList("test_user");
+        List<String> tableList = Lists.newArrayList("data_api");
 
         if (CollectionUtils.isNotEmpty(tableList)) {
             tableList.forEach(table -> codeGenerator.autoGenerator(table));

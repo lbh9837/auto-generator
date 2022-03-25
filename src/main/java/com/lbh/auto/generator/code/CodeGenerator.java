@@ -158,7 +158,7 @@ public class CodeGenerator {
             List<FileOutConfig> focList = new ArrayList<>();
             nodeList.forEach(node -> {
                 // 自定义配置会被优先输出
-                focList.add(createOutputFile(node.getTemplatePath(), node.getCodePath()));
+                focList.add(createOutputFile(node));
             });
             cfg.setFileOutConfigList(focList);
         }
@@ -175,12 +175,12 @@ public class CodeGenerator {
         return cfgMap;
     }
 
-    protected FileOutConfig createOutputFile(String templatePath, String codePath) {
-        return new FileOutConfig(templatePath) {
+    protected FileOutConfig createOutputFile(TemplateCodeNode node) {
+        return new FileOutConfig(node.getTemplatePath()) {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return codePath;
+                return node.getCodePath() + String.format(node.getFileName(), tableInfo.getEntityName()) + node.getFileType();
             }
         };
     }
@@ -227,5 +227,7 @@ public class CodeGenerator {
     static class TemplateCodeNode {
         private String templatePath;
         private String codePath;
+        private String fileName;
+        private String fileType;
     }
 }
